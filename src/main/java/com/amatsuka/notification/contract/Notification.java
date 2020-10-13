@@ -22,7 +22,5 @@ public interface Notification {
 
     boolean once();
 
-    default String getSourceId() {return null;}
-
-    default String getRecipientId() {return null;}
+    default String getHash() {return "";}
 }

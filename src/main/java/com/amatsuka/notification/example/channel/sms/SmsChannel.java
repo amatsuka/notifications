@@ -1,20 +1,19 @@
-package com.amatsuka.notification.channel;
+package com.amatsuka.notification.example.channel.sms;
 
 import com.amatsuka.notification.ENotificationChannel;
 import com.amatsuka.notification.contract.Notification;
 import com.amatsuka.notification.contract.NotificationChannel;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
 
-@Component
 @RequiredArgsConstructor
 public class SmsChannel implements NotificationChannel {
-    private final SmsRequestService smsRequestService;
+    private final SmsService smsService;
 
     @Override
     public void send(Notification notification) {
         notification.toSms().ifPresent(message ->
-                smsRequestService.createSmsRequestAndSend(message.getPhone(), message.getType(), message.getStatus(), message.getText(), message.getSourceId()));
+                smsService.send(message.getPhone(), message.getText())
+        );
 
     }
 

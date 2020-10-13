@@ -7,12 +7,5 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class SmsMessage {
     private String phone;
-
     private String text;
-
-    private ESmsRequestStatus status;
-
-    private ESmsRequestType type;
-
-    private Long sourceId;
 }

@@ -1,11 +1,10 @@
-package com.amatsuka.notification.channel;
+package com.amatsuka.notification.example.channel.store;
 
 import com.amatsuka.notification.ENotificationChannel;
 import com.amatsuka.notification.contract.Notification;
 import com.amatsuka.notification.contract.NotificationChannel;
 import lombok.RequiredArgsConstructor;
 
-@Component
 @RequiredArgsConstructor
 public class NotificationStoreChannel implements NotificationChannel {
     private final NotificationStoreService notificationStoreService;

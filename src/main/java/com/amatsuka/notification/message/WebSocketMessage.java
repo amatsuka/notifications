@@ -8,6 +8,5 @@ import lombok.experimental.Accessors;
 public class WebSocketMessage {
     private String username;
     private String channel;
-    private String type;
     private String content;
 }
