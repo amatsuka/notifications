@@ -1,6 +1,6 @@
-package com.amatsuka.notification.example.firednotificationservice;
+package com.amatsuka.notification.firednotificationservice;
 
-import com.amatsuka.notification.ENotificationType;
+import com.amatsuka.notification.notification.ENotificationType;
 import lombok.Data;
 import lombok.experimental.Accessors;
 

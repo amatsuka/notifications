@@ -1,4 +1,4 @@
-package com.amatsuka.notification.example.firednotificationservice;
+package com.amatsuka.notification.firednotificationservice;
 
 import com.amatsuka.notification.contract.FiredNotificationService;
 import com.amatsuka.notification.contract.Notification;
@@ -15,13 +15,13 @@ public class FiredNotificationServiceSimple implements FiredNotificationService 
 
     public boolean notificationIsFired(Notification notification) {
         return firedNotifications.stream()
-                .noneMatch(__ -> __.getType() == notification.getType() && __.getHash().equals(notification.getHash()));
+                .anyMatch(__ -> __.getType() == notification.getType() && __.getHash().equals(notification.getStoreHash()));
     }
 
     public void addNotification(Notification notification) {
         FiredNotification firedNotification = new FiredNotification()
                 .setFiredAt(LocalDateTime.now())
-                .setHash(notification.getHash())
+                .setHash(notification.getStoreHash())
                 .setType(notification.getType());
 
         firedNotifications.add(firedNotification);

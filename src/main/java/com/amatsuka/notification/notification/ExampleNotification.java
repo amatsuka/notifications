@@ -1,7 +1,6 @@
-package com.amatsuka.notification.example;
+package com.amatsuka.notification.notification;
 
-import com.amatsuka.notification.ENotificationChannel;
-import com.amatsuka.notification.ENotificationType;
+import com.amatsuka.notification.channel.ENotificationChannelType;
 import com.amatsuka.notification.contract.Notification;
 import com.amatsuka.notification.message.NotificationStoreMessage;
 import com.amatsuka.notification.message.SmsMessage;
@@ -14,8 +13,8 @@ import static java.util.Arrays.asList;
 
 public class ExampleNotification implements Notification {
     @Override
-    public List<ENotificationChannel> via() {
-        return asList(ENotificationChannel.SMS, ENotificationChannel.WEBSOCKET, ENotificationChannel.NOTIFICATION_STORE);
+    public List<ENotificationChannelType> via() {
+        return asList(ENotificationChannelType.SMS, ENotificationChannelType.WEB_SOCKET, ENotificationChannelType.NOTIFICATION_STORE);
     }
 
     @Override
@@ -39,7 +38,7 @@ public class ExampleNotification implements Notification {
 
     @Override
     public Optional<NotificationStoreMessage> toNotificationStore() {
-        return Optional.of(new NotificationStoreMessage());
+        return Optional.empty();
     }
 
     @Override
@@ -48,7 +47,7 @@ public class ExampleNotification implements Notification {
     }
 
     @Override
-    public String getHash() {
+    public String getStoreHash() {
         return "some hash";
     }
 }

@@ -1,26 +1,43 @@
 package com.amatsuka.notification;
 
-import com.amatsuka.notification.example.channel.sms.SmsChannel;
-import com.amatsuka.notification.example.channel.sms.SmsService;
-import com.amatsuka.notification.example.channel.store.NotificationStoreChannel;
-import com.amatsuka.notification.example.channel.store.NotificationStoreService;
-import com.amatsuka.notification.example.channel.websocket.WebSocketChannel;
-import com.amatsuka.notification.example.channel.websocket.WebSocketService;
-import com.amatsuka.notification.example.firednotificationservice.FiredNotificationServiceSimple;
+import com.amatsuka.notification.channel.sms.SmsChannel;
+import com.amatsuka.notification.channel.store.NotificationStoreChannel;
+import com.amatsuka.notification.channel.websocket.WebSocketChannel;
+import com.amatsuka.notification.firednotificationservice.FiredNotificationServiceSimple;
 
 public class Example {
     public static void main(String[] args) {
-        NotificationFactory notificationFactory = new NotificationFactory();
 
+        /*
+            Конфигурация фабрики сервисов реализующих каналы отправки уведомлений
+         */
         NotificationChannelFactory notificationChannelFactory = new NotificationChannelFactory()
-                .addChannel(new SmsChannel(new SmsService()))
-                .addChannel(new WebSocketChannel(new WebSocketService()))
-                .addChannel(new NotificationStoreChannel(new NotificationStoreService()));
+                .addChannel(new SmsChannel())
+                .addChannel(new WebSocketChannel())
+                .addChannel(new NotificationStoreChannel());
 
+        /*
+            Конфигурация сервиса регистрации отправленных уведомлений
+         */
         FiredNotificationServiceSimple firedNotificationService = new FiredNotificationServiceSimple();
+
+
 
         NotificationService notificationService = new NotificationService(firedNotificationService, notificationChannelFactory);
 
+        NotificationFactory notificationFactory = new NotificationFactory();
+
+        /*
+          Отправка уведомления
+         */
+
+        System.out.println("Попытка отправки уведомления");
+        notificationService.sendNotification(notificationFactory.exampleNotification());
+
+        /*
+          Повторная отправка уведомления не произойдет если Notification.once() вернет true
+         */
+        System.out.println("Повторная попытка отправки одноразового уведомления");
         notificationService.sendNotification(notificationFactory.exampleNotification());
     }
 }
